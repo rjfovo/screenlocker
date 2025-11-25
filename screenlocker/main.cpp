@@ -21,6 +21,7 @@
 #include <QDBusConnection>
 #include <QTranslator>
 #include <QLocale>
+#include <QFile>  // 添加 QFile 头文件
 
 int main(int argc, char *argv[])
 {

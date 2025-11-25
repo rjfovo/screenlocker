@@ -17,13 +17,13 @@ add_executable(cutefish-screenlocker
 
 target_link_libraries(cutefish-screenlocker
     PRIVATE
-    Qt5::Core
-    Qt5::DBus
-    Qt5::Widgets
-    Qt5::X11Extras
-    Qt5::Quick
-
+    Qt6::Core
+    Qt6::DBus
+    Qt6::Widgets
+    Qt6::Quick
     ${X11_LIBRARIES}
 )
+
+# 注意：Qt6中移除了X11Extras模块，相关功能需要直接使用X11库
 
 install(TARGETS cutefish-screenlocker RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})

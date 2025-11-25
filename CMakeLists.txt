@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.21)  # Qt6要求的最低CMake版本
 
 project(screenlocker)
 set(CMAKE_C_STANDARD 99)
@@ -18,7 +18,10 @@ include(CheckIncludeFiles)
 include(CheckSymbolExists)
 include(FeatureSummary)
 
-find_package(Qt5 COMPONENTS Core DBus Widgets X11Extras Quick LinguistTools REQUIRED)
+# 查找Qt6包
+find_package(Qt6 REQUIRED COMPONENTS Core DBus Widgets Quick LinguistTools)
+
+# 注意：Qt6中移除了X11Extras模块，相关功能可能需要通过其他方式实现
 find_package(X11)
 
 # ----------- Check --------------------
@@ -66,8 +69,8 @@ add_subdirectory(checkpass)
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
 
-# Get the installation directory from qmake
-get_target_property(QT_QMAKE_EXECUTABLE ${Qt5Core_QMAKE_EXECUTABLE} IMPORTED_LOCATION)
+# 获取安装目录 - 使用Qt6的方法
+get_target_property(QT_QMAKE_EXECUTABLE Qt6::qmake IMPORTED_LOCATION)
 if(NOT QT_QMAKE_EXECUTABLE)
     message(FATAL_ERROR "qmake is not found.")
 endif()
@@ -82,10 +85,12 @@ else()
     message(FATAL_ERROR "qml directory cannot be detected.")
 endif()
 
-# Install translations
+# 安装翻译 - 使用Qt6的现代翻译命令
 file(GLOB TS_FILES translations/*.ts)
-qt5_create_translation(QM_FILES ${TS_FILES})
+
+# 使用Qt6的翻译处理方式
+qt_add_translation(QM_FILES ${TS_FILES})
+
 add_custom_target(translations DEPENDS ${QM_FILES} SOURCES ${TS_FILES})
 add_dependencies(cutefish-screenlocker translations)
 install(FILES ${QM_FILES} DESTINATION /usr/share/cutefish-screenlocker/translations)
-
