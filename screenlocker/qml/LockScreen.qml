@@ -17,11 +17,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.12
-import QtQuick.Window 2.12
-import QtQuick.Controls 2.12
-import QtQuick.Layouts 1.12
-import QtGraphicalEffects 1.0
+import QtQuick 6.0
+import QtQuick.Window 6.0
+import QtQuick.Controls 6.0
+import QtQuick.Layouts 6.0
+import Qt5Compat.GraphicalEffects 1.0
 
 import Cutefish.Accounts 1.0 as Accounts
 import Cutefish.System 1.0 as System
