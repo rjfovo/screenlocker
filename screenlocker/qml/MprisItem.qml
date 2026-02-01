@@ -18,11 +18,10 @@
  */
 
 import QtQuick 6.0
-import QtQuick.Layouts 6.0
 import QtQuick.Controls 6.0
 import Qt5Compat.GraphicalEffects 6.0
 import FishUI 1.0 as FishUI
-import Cutefish.Mpris 1.0
+import cutefish.mpris 1.0
 
 Item {
     id: control
@@ -30,9 +29,9 @@ Item {
     property bool available: mprisManager.availableServices.length > 0
     property bool isPlaying: currentService && mprisManager.playbackStatus === Mpris.Playing
     property alias currentService: mprisManager.currentService
-    property var artUrlTag: Mpris.metadataToString(Mpris.ArtUrl)
-    property var titleTag: Mpris.metadataToString(Mpris.Title)
-    property var artistTag: Mpris.metadataToString(Mpris.Artist)
+    property var artUrlTag: "mpris:artUrl"
+    property var titleTag: "xesam:title"
+    property var artistTag: "xesam:artist"
 
     MprisManager {
         id: mprisManager

@@ -23,8 +23,8 @@ import QtQuick.Controls 6.0
 import QtQuick.Layouts 6.0
 import Qt5Compat.GraphicalEffects 6.0
 
-import Cutefish.Accounts 1.0 as Accounts
-import Cutefish.System 1.0 as System
+import cutefish.accounts 1.0 as Accounts
+import cutefish.system 1.0 as System
 import FishUI 1.0 as FishUI
 
 Item {
