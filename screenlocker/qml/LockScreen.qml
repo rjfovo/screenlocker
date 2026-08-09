@@ -39,10 +39,11 @@ Item {
         id: wallpaper
     }
 
+    // 背景层：图片（type 0）/ 纯色（type 1）/ 视频（type 2）
     Image {
         id: wallpaperImage
         anchors.fill: parent
-        source: "file://" + wallpaper.path
+        source: wallpaper.type === 0 ? "file://" + wallpaper.path : ""
         sourceSize: Qt.size(width * Screen.devicePixelRatio,
                             height * Screen.devicePixelRatio)
         fillMode: Image.PreserveAspectCrop
@@ -50,6 +51,7 @@ Item {
         clip: true
         cache: false
         smooth: true
+        visible: wallpaper.type === 0
     }
 
     FastBlur {
@@ -58,7 +60,35 @@ Item {
         radius: 0
         source: wallpaperImage
         cached: true
-        visible: true
+        visible: wallpaper.type === 0
+    }
+
+    // 纯色背景
+    Rectangle {
+        anchors.fill: parent
+        color: wallpaper.color
+        visible: wallpaper.type === 1
+    }
+
+    // 视频壁纸：仅视频模式下动态加载（独立文件，避免无 QtMultimedia 时锁屏 QML 编译失败）
+    Loader {
+        id: videoWallpaperLoader
+        anchors.fill: parent
+        active: wallpaper.type === 2
+        source: "qrc:/qml/VideoWallpaper.qml"
+
+        onLoaded: {
+            item.source = wallpaper.path ? "file://" + wallpaper.path : ""
+        }
+
+        Connections {
+            target: wallpaper
+
+            function onPathChanged() {
+                if (videoWallpaperLoader.item)
+                    videoWallpaperLoader.item.source = wallpaper.path ? "file://" + wallpaper.path : ""
+            }
+        }
     }
 
     NumberAnimation {

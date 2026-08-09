@@ -25,6 +25,8 @@ Depends: qml6-module-qtquick-controls,
          qml6-module-qtquick-window,
          qml6-module-qtquick-shapes,
          qml6-module-qtquick-dialogs,
+         qml6-module-qtmultimedia,
+         libqt6multimedia6,
          ${misc:Depends},
          ${shlibs:Depends}
 Description: CutefishOS Screen Locker

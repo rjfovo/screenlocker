@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>qml/LockScreen.qml</file>
+        <file>qml/VideoWallpaper.qml</file>
         <file>images/login.svg</file>
         <file>qml/LoginButton.qml</file>
         <file>images/screensaver-unlock-symbolic.svg</file>
